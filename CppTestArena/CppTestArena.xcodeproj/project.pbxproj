@@ -45,7 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				023A4AE11B37E03400B6DD02 /* CppTestArena */,
-				023A4B051B37E5A300B6DD02 /* References */,
+				023A4B051B37E5A300B6DD02 /* Frameworks */,
 				023A4AE01B37E03400B6DD02 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -66,12 +66,12 @@
 			path = CppTestArena;
 			sourceTree = "<group>";
 		};
-		023A4B051B37E5A300B6DD02 /* References */ = {
+		023A4B051B37E5A300B6DD02 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				023A4B061B37E65700B6DD02 /* libCppTestArenaLib.a */,
 			);
-			name = References;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
