@@ -7,10 +7,16 @@
 //
 
 #include <iostream>
+#include "LibThing.h"
 
 int main(int argc, const char *argv[])
 {
     // insert code here...
     std::cout << "Hello, World!\n";
+    
+    cpptestarena::LibThing thing{5};
+    
+    thing.printStuff();
+    
     return 0;
 }

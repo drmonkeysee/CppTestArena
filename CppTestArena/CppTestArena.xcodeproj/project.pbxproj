@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		023A4AE31B37E03400B6DD02 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 023A4AE21B37E03400B6DD02 /* main.cpp */; };
+		023A4B071B37E65700B6DD02 /* libCppTestArenaLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 023A4B061B37E65700B6DD02 /* libCppTestArenaLib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		023A4ADF1B37E03400B6DD02 /* CppTestArena */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CppTestArena; sourceTree = BUILT_PRODUCTS_DIR; };
 		023A4AE21B37E03400B6DD02 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		023A4B061B37E65700B6DD02 /* libCppTestArenaLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCppTestArenaLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				023A4B071B37E65700B6DD02 /* libCppTestArenaLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				023A4AE11B37E03400B6DD02 /* CppTestArena */,
+				023A4B051B37E5A300B6DD02 /* References */,
 				023A4AE01B37E03400B6DD02 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -60,6 +64,14 @@
 				023A4AE21B37E03400B6DD02 /* main.cpp */,
 			);
 			path = CppTestArena;
+			sourceTree = "<group>";
+		};
+		023A4B051B37E5A300B6DD02 /* References */ = {
+			isa = PBXGroup;
+			children = (
+				023A4B061B37E65700B6DD02 /* libCppTestArenaLib.a */,
+			);
+			name = References;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +217,14 @@
 		023A4AE71B37E03400B6DD02 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)/usr/local/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +232,14 @@
 		023A4AE81B37E03400B6DD02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)/usr/local/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +263,7 @@
 				023A4AE81B37E03400B6DD02 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
