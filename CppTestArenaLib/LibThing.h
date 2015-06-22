@@ -15,8 +15,7 @@ namespace cpptestarena {
     public:
         explicit LibThing(int value)
         :v{value}
-        {
-        }
+        {}
         
         void printStuff() const;
         

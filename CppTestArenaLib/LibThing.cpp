@@ -9,10 +9,7 @@
 #include <iostream>
 #include "LibThing.h"
 
-namespace cpptestarena {
-    
-    void LibThing::printStuff() const
-    {
-        std::cout << "LibThing contains " << this->v << std::endl;
-    }
+void cpptestarena::LibThing::printStuff() const
+{
+    std::cout << "LibThing contains " << this->v << std::endl;
 }
