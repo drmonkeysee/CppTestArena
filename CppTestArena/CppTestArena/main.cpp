@@ -35,6 +35,16 @@ void fors()
 //    std::cout << "i'm a function" << std::endl;
 //}
 
+class bort {
+public:
+    int r;
+};
+
+void bort()
+{
+    std::cout << "i'm a bort function" << std::endl;
+}
+
 void structDeclarations()
 {
     foo f;
@@ -64,6 +74,11 @@ void structDeclarations()
     
     // rvalue ctor result
     func_or_struct();
+    
+    //bort b;
+    class bort brt;
+    brt.r = 10;
+    bort();
 }
 
 void libthing()
