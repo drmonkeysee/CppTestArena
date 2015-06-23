@@ -21,14 +21,19 @@ typedef struct fors {
     int s;
 } func_or_struct;
 
-struct func_or_struct {
-    int t;
-};
-
-void func_or_struct()
+void fors()
 {
-    std::cout << "i'm a function" << std::endl;
+    std::cout << "i am also a function" << std::endl;
 }
+
+//struct func_or_struct {
+//    int t;
+//};
+//
+//void func_or_struct()
+//{
+//    std::cout << "i'm a function" << std::endl;
+//}
 
 void structDeclarations()
 {
@@ -49,12 +54,15 @@ void structDeclarations()
     struct blarg b3;
     b3.b = 8;
     
-    fors s;
+    //fors s;
+    struct fors s;
     s.s = 8;
+    fors();
     
     func_or_struct fs;
     fs.s = 8;
     
+    // rvalue ctor result
     func_or_struct();
 }
 
