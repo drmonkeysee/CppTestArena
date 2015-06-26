@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "LibThing.h"
+#include "LibThing.hpp"
 
 void cpptestarena::LibThing::printStuff() const
 {

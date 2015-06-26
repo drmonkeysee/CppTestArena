@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		023A4B011B37E35900B6DD02 /* LibThing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 023A4AFF1B37E35900B6DD02 /* LibThing.cpp */; };
-		023A4B021B37E35900B6DD02 /* LibThing.h in Headers */ = {isa = PBXBuildFile; fileRef = 023A4B001B37E35900B6DD02 /* LibThing.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		023A4B021B37E35900B6DD02 /* LibThing.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 023A4B001B37E35900B6DD02 /* LibThing.hpp */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		023A4AF21B37E0A400B6DD02 /* libCppTestArenaLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCppTestArenaLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		023A4AFF1B37E35900B6DD02 /* LibThing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LibThing.cpp; sourceTree = "<group>"; };
-		023A4B001B37E35900B6DD02 /* LibThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibThing.h; sourceTree = "<group>"; };
+		023A4B001B37E35900B6DD02 /* LibThing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LibThing.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,7 +31,7 @@
 		023A4AE91B37E0A400B6DD02 = {
 			isa = PBXGroup;
 			children = (
-				023A4B001B37E35900B6DD02 /* LibThing.h */,
+				023A4B001B37E35900B6DD02 /* LibThing.hpp */,
 				023A4AFF1B37E35900B6DD02 /* LibThing.cpp */,
 				023A4AF31B37E0A400B6DD02 /* Products */,
 			);
@@ -52,7 +52,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				023A4B021B37E35900B6DD02 /* LibThing.h in Headers */,
+				023A4B021B37E35900B6DD02 /* LibThing.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

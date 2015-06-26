@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "LibThing.h"
+#include "LibThing.hpp"
 
 struct foo {
     int v;
@@ -26,10 +26,12 @@ void fors()
     std::cout << "i am also a function" << std::endl;
 }
 
+// conflicts with typedef of fors
 //struct func_or_struct {
 //    int t;
 //};
 //
+// also conflicts with typedef of fors
 //void func_or_struct()
 //{
 //    std::cout << "i'm a function" << std::endl;
@@ -64,7 +66,7 @@ void structDeclarations()
     struct blarg b3;
     b3.b = 8;
     
-    //fors s;
+    //fors s; // fors is a function
     struct fors s;
     s.s = 8;
     fors();
@@ -75,7 +77,7 @@ void structDeclarations()
     // rvalue ctor result
     func_or_struct();
     
-    //bort b;
+    //bort b; // bort is a function
     class bort brt;
     brt.r = 10;
     bort();

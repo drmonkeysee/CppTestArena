@@ -6,8 +6,8 @@
 //  Copyright (c) 2015 Brandon Stansbury. All rights reserved.
 //
 
-#ifndef CppTestArenaLib_LibThing_h
-#define CppTestArenaLib_LibThing_h
+#ifndef CppTestArenaLib_LibThing_hpp
+#define CppTestArenaLib_LibThing_hpp
 
 namespace cpptestarena {
     
