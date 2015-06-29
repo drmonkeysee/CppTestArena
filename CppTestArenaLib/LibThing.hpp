@@ -10,7 +10,6 @@
 #define CppTestArenaLib_LibThing_hpp
 
 namespace cpptestarena {
-    
     class LibThing {
     public:
         explicit LibThing(int value)
