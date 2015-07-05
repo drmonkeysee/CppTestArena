@@ -7,7 +7,9 @@
 //
 
 #include <iostream>
+#include <utility>
 #include "LibThing.hpp"
+#include "ownership.hpp"
 
 struct foo {
     int v;
@@ -87,6 +89,16 @@ void libthing()
 {
     cpptestarena::LibThing thing{5};
     thing.printStuff();
+}
+
+void ownership()
+{
+    FooBar me{2};
+    FooBar you{4};
+    own_rvalue(std::move(me));
+    own_sp(std::make_unique<FooBar>(you));
+    own_rvalue({7});
+    own_sp(std::make_unique<FooBar>({10}));
 }
 
 int main(int argc, const char* argv[])
