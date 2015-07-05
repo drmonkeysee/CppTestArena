@@ -9,7 +9,7 @@
 #include "ownership.hpp"
 
 std::unique_ptr<FooBar> fromRValue;
-std::unique_ptr<FooBar> fromPointer = std::make_unique<FooBar>(nullptr);
+std::unique_ptr<FooBar> fromPointer;
 
 void own_rvalue(FooBar&& f)
 {

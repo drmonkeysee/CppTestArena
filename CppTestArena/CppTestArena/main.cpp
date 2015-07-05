@@ -98,7 +98,6 @@ void ownership()
     own_rvalue(std::move(me));
     own_sp(std::make_unique<FooBar>(you));
     own_rvalue({7});
-    own_sp(std::make_unique<FooBar>({10}));
 }
 
 int main(int argc, const char* argv[])
