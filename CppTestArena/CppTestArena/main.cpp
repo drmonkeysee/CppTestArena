@@ -100,6 +100,30 @@ void ownership()
     own_rvalue({7});
 }
 
+struct Bodyless;
+
+template<typename T>
+void with_type(int i)
+{
+    std::cout << i;
+}
+
+struct ClassParent {
+    virtual int foo() const { return 10; }
+};
+
+class StructChild : public ClassParent {
+public:
+    int foo() const override { return 5; }
+};
+
+void inheritance()
+{
+    ClassParent p;
+    StructChild c;
+    std::cout << "foo is " << p.foo() << " or " << c.foo() << std::endl;
+}
+
 int main(int argc, const char* argv[])
 {
     // insert code here...
@@ -107,6 +131,9 @@ int main(int argc, const char* argv[])
     
     structDeclarations();
     libthing();
+    inheritance();
+    
+    with_type<Bodyless>(5);
     
     return 0;
 }
