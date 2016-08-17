@@ -15,6 +15,12 @@ struct foo {
     int v;
 };
 
+struct bar {
+    bar(int v) : v{v} {}
+    
+    int v;
+};
+
 typedef struct blarg {
     int b;
 } alt_blarg;
@@ -85,10 +91,17 @@ void structDeclarations()
     bort();
 }
 
+using Foo = int;
+using Bar = int;
+
 void libthing()
 {
     cpptestarena::LibThing thing{5};
     thing.printStuff();
+    
+    Bar b = 10;
+    Foo f = b;
+    std::cout << f;
 }
 
 void ownership()
@@ -105,7 +118,7 @@ struct Bodyless;
 template<typename T>
 void with_type(int i)
 {
-    std::cout << i;
+    std::cout << i << std::endl;
 }
 
 struct ClassParent {
@@ -124,16 +137,82 @@ void inheritance()
     std::cout << "foo is " << p.foo() << " or " << c.foo() << std::endl;
 }
 
+struct ctor_test {
+    int a;
+    int b;
+    float c;
+    
+    ctor_test(int a, int b, float c) : a{a}, b{b}, c{c}
+    {
+        std::cout << "ctor called" << std::endl;
+    }
+    
+    ctor_test(const ctor_test& that)
+    {
+        a = that.a;
+        b = that.b;
+        c = that.c;
+        std::cout << "cctor called" << std::endl;
+    }
+    
+    ctor_test(ctor_test&& that)
+    {
+        a = that.a;
+        b = that.b;
+        c = that.c;
+        std::cout << "mctor called" << std::endl;
+    }
+    
+    ~ctor_test()
+    {
+        std::cout << "dtor called" << std::endl;
+    }
+};
+
+void ctors(ctor_test arg)
+{
+    std::cout << "arg is " << arg.a << std::endl;
+}
+
+ctor_test make_ctor()
+{
+    return ctor_test{6, 7, 8.0f};
+}
+
+void ctors()
+{
+    ctor_test a{1, 2, 3.0f};
+    ctors(a);
+    ctors(ctor_test{3, 4, 5.0f});
+    ctors(make_ctor());
+    ctors(std::move(make_ctor()));
+}
+
 int main(int argc, const char* argv[])
 {
     // insert code here...
     std::cout << "Hello, World!\n";
     
+    int v{};
+    std::cout << "v is " << v << std::endl;
+    foo f;
+    std::cout << "f is " << f.v << std::endl;
+    bar b{2};
+    std::cout << "b is " << b.v << std::endl;
+    
+    foo a = {};
+    foo d{};
+    foo c = {10};
+    
+    constexpr static int num = 10;
+    static_assert(0x2 == 2, "foobar");
+    //static_assert(0x2 == 0x20, "barfoo");
+    
     structDeclarations();
     libthing();
     inheritance();
-    
     with_type<Bodyless>(5);
+    ctors();
     
     return 0;
 }
