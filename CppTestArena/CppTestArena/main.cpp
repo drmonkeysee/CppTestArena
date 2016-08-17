@@ -182,8 +182,11 @@ ctor_test make_ctor()
 void ctors()
 {
     ctor_test a{1, 2, 3.0f};
+    ctor_test b = {2, 3, 4.0f};
     ctors(a);
-    ctors(ctor_test{3, 4, 5.0f});
+    ctors(b);
+    ctors({3, 4, 5.0f});
+    ctors(ctor_test{4, 5, 6.0f});
     ctors(make_ctor());
     ctors(std::move(make_ctor()));
 }
