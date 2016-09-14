@@ -144,7 +144,7 @@ struct ctor_test {
     
     ctor_test(int a, int b, float c) : a{a}, b{b}, c{c}
     {
-        std::cout << "ctor called" << std::endl;
+        std::cout << "ctor called " << a << std::endl;
     }
     
     ctor_test(const ctor_test& that)
@@ -152,7 +152,7 @@ struct ctor_test {
         a = that.a;
         b = that.b;
         c = that.c;
-        std::cout << "cctor called" << std::endl;
+        std::cout << "cctor called " << a << std::endl;
     }
     
     ctor_test(ctor_test&& that)
@@ -160,12 +160,12 @@ struct ctor_test {
         a = that.a;
         b = that.b;
         c = that.c;
-        std::cout << "mctor called" << std::endl;
+        std::cout << "mctor called " << a << std::endl;
     }
     
     ~ctor_test()
     {
-        std::cout << "dtor called" << std::endl;
+        std::cout << "dtor called " << a << std::endl;
     }
 };
 
