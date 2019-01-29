@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <utility>
+#include <initializer_list>
 #include "LibThing.hpp"
 #include "ownership.hpp"
 
@@ -48,6 +49,30 @@ void fors()
 class bort {
 public:
     int r;
+};
+
+class Baz {
+public:
+    explicit Baz(int a, int b, int c) : a{a}, b{b}, c{c} { std::cout << "Baz ctor called" << std::endl; }
+        
+    /*Baz(std::initializer_list<int> list)
+    {
+        std::initializer_list<int>::size_type size = list.size();
+        std::cout << "Baz list ctor called with size: " << size << std::endl;
+        this->a = 1;
+        this->b = 2;
+        this->c = 3;
+    }*/
+        
+    /*Baz(const Baz& other)
+    {
+        this->a = other.a;
+        this->b = other.b;
+        this->c = other.c;
+        std::cout << "Baz copy ctor called" << std::endl;
+    }*/
+private:
+    int a, b, c;
 };
 
 void bort()
@@ -107,7 +132,11 @@ void libthing()
 void ownership()
 {
     FooBar me{2};
+    FooBar us = {2};
     FooBar you{4};
+    Baz b{7, 8, 9};
+    Baz b2 = {4, 5, 6};
+    Baz b3 = b;
     own_rvalue(std::move(me));
     own_sp(std::make_unique<FooBar>(you));
     own_rvalue({7});
@@ -216,6 +245,7 @@ int main(int argc, const char* argv[])
     inheritance();
     with_type<Bodyless>(5);
     ctors();
+    ownership();
     
     return 0;
 }
