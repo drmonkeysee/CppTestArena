@@ -234,6 +234,20 @@ struct better_static_func {
     constexpr operator func_type() const noexcept { return func; }
 };
 
+// Alternate approach using enable_if and partial specialization
+/*
+template<auto fn, typename Func = decltype(fn), typename = void>
+struct better_static_func;
+
+template<auto fn, typename Func>
+struct better_static_func<fn, Func, typename std::enable_if_t<std::is_function_v<std::remove_pointer_t<Func>>>> {
+    using func_type = Func;
+    constexpr static func_type func = fn;
+    
+    constexpr operator func_type() const noexcept { return func; }
+};
+*/
+
 void one_param(int i)
 {
     std::cout << "One param: " << i << std::endl;
