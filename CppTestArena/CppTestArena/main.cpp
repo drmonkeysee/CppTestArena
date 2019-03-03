@@ -9,8 +9,23 @@
 #include <iostream>
 #include <utility>
 #include <initializer_list>
+#include <type_traits>
 #include "LibThing.hpp"
 #include "ownership.hpp"
+
+template<typename T>
+struct type_diagnostic;
+#define check_type(x) type_diagnostic<decltype(x)> x ## Type;
+
+
+// const vs constexpr
+
+const char *cs = "foobar";
+constexpr char *ces = "barfoo";
+constexpr const char *cces = "baz";
+
+
+// Name testing with typedefs and identifiers
 
 struct foo {
     int v;
@@ -49,30 +64,6 @@ void fors()
 class bort {
 public:
     int r;
-};
-
-class Baz {
-public:
-    explicit Baz(int a, int b, int c) : a{a}, b{b}, c{c} { std::cout << "Baz ctor called" << std::endl; }
-        
-    /*Baz(std::initializer_list<int> list)
-    {
-        std::initializer_list<int>::size_type size = list.size();
-        std::cout << "Baz list ctor called with size: " << size << std::endl;
-        this->a = 1;
-        this->b = 2;
-        this->c = 3;
-    }*/
-        
-    /*Baz(const Baz& other)
-    {
-        this->a = other.a;
-        this->b = other.b;
-        this->c = other.c;
-        std::cout << "Baz copy ctor called" << std::endl;
-    }*/
-private:
-    int a, b, c;
 };
 
 void bort()
@@ -116,6 +107,9 @@ void structDeclarations()
     bort();
 }
 
+
+// Referencing external library and usings as typedefs
+
 using Foo = int;
 using Bar = int;
 
@@ -129,26 +123,29 @@ void libthing()
     std::cout << f;
 }
 
+
+// Ownership and initialization testing
+
 void ownership()
 {
     FooBar me{2};
     FooBar us = {2};
     FooBar you{4};
-    Baz b{7, 8, 9};
-    Baz b2 = {4, 5, 6};
-    Baz b3 = b;
+    InitializationTest b{7, 8, 9};
+    // copy initialization can't use explicit ctors
+    //InitializationTest b2 = {4, 5, 6};
+    InitializationTest b3 = b;
     own_rvalue(std::move(me));
     own_sp(std::make_unique<FooBar>(you));
     own_rvalue({7});
+    
+    foo a = {};
+    foo d{};
+    foo c = {10};
 }
 
-struct Bodyless;
-
-template<typename T>
-void with_type(int i)
-{
-    std::cout << i << std::endl;
-}
+        
+// Virtual method dispatch
 
 struct ClassParent {
     virtual int foo() const { return 10; }
@@ -166,6 +163,9 @@ void inheritance()
     std::cout << "foo is " << p.foo() << " or " << c.foo() << std::endl;
 }
 
+
+// Constructor tests
+
 struct ctor_test {
     int a;
     int b;
@@ -176,19 +176,13 @@ struct ctor_test {
         std::cout << "ctor called " << a << std::endl;
     }
     
-    ctor_test(const ctor_test& that)
+    ctor_test(const ctor_test& that) : a{that.a}, b{that.b}, c{that.c}
     {
-        a = that.a;
-        b = that.b;
-        c = that.c;
         std::cout << "cctor called " << a << std::endl;
     }
     
-    ctor_test(ctor_test&& that)
+    ctor_test(ctor_test&& that) : a{that.a}, b{that.b}, c{that.c}
     {
-        a = that.a;
-        b = that.b;
-        c = that.c;
         std::cout << "mctor called " << a << std::endl;
     }
     
@@ -220,6 +214,80 @@ void ctors()
     ctors(std::move(make_ctor()));
 }
 
+
+// Static Function Wrapping
+
+#define stringify(e) #e
+#define type_assert_failure(e) stringify(e)
+
+template<auto fn>
+using static_func = std::integral_constant<decltype(fn), fn>;
+
+template<auto fn, typename Func = decltype(fn)>
+struct better_static_func {
+    using func_type = Func;
+    constexpr static func_type func = fn;
+    
+    static_assert(std::is_function_v<std::remove_pointer_t<func_type>>,
+                  "template parameter fn must be a function or pointer to function");
+    
+    constexpr operator func_type() const noexcept { return func; }
+};
+
+void one_param(int i)
+{
+    std::cout << "One param: " << i << std::endl;
+}
+
+void no_param()
+{
+    std::cout << "No param" << std::endl;
+}
+
+void static_func_wrapping()
+{
+    static_func<one_param> op;
+    static_func<no_param> np;
+    op(10);
+    // this call is static_func<no_param>::operator() which just returns value
+    // interferes with implicit conversion to function pointer
+    np();
+    np()();
+    
+    auto opf = op.value;
+    auto npf = np.value;
+    opf(12);
+    npf();
+    
+    better_static_func<one_param> bop;
+    better_static_func<no_param> bnp;
+    bop(20);
+    bnp();
+    
+    auto bopf = bop.func;
+    auto bnpf = bnp.func;
+    bopf(22);
+    bnpf();
+    
+    better_static_func<&one_param> bopp;
+    bopp(30);
+    
+    // fails static assert
+    //better_static_func<5> badFunc;
+}
+
+
+// Incomplete type parameter
+
+struct Bodyless;
+
+template<typename T>
+void with_type(int i)
+{
+    std::cout << "Bodyless called" << i << std::endl;
+}
+
+
 int main(int argc, const char* argv[])
 {
     // insert code here...
@@ -232,10 +300,6 @@ int main(int argc, const char* argv[])
     bar b{2};
     std::cout << "b is " << b.v << std::endl;
     
-    foo a = {};
-    foo d{};
-    foo c = {10};
-    
     constexpr static int num = 10;
     static_assert(0x2 == 2, "foobar");
     //static_assert(0x2 == 0x20, "barfoo");
@@ -246,6 +310,7 @@ int main(int argc, const char* argv[])
     with_type<Bodyless>(5);
     ctors();
     ownership();
+    static_func_wrapping();
     
     return 0;
 }
