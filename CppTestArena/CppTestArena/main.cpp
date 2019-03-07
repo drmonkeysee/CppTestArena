@@ -240,7 +240,7 @@ template<auto fn, typename Func = decltype(fn), typename = void>
 struct better_static_func;
 
 template<auto fn, typename Func>
-struct better_static_func<fn, Func, typename std::enable_if_t<std::is_function_v<std::remove_pointer_t<Func>>>> {
+struct better_static_func<fn, Func, std::enable_if_t<std::is_function_v<std::remove_pointer_t<Func>>>> {
     using func_type = Func;
     constexpr static func_type func = fn;
     
