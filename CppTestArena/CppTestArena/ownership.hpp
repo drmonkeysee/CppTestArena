@@ -20,7 +20,7 @@ class InitializationTest {
 public:
     explicit InitializationTest(int a, int b, int c)
     : a(a), b(b), c(c) { std::cout << "Baz ctor called" << std::endl; }
-    
+
     /*InitializationTest(std::initializer_list<int> list)
      {
      std::initializer_list<int>::size_type size = list.size();
@@ -29,7 +29,7 @@ public:
      this->b = 2;
      this->c = 3;
      }*/
-    
+
     /*InitializationTest(const Baz& other)
      {
      this->a = other.a;

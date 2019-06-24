@@ -33,7 +33,7 @@ struct foo {
 
 struct bar {
     bar(int v) : v{v} {}
-    
+
     int v;
 };
 
@@ -77,30 +77,30 @@ void structDeclarations()
     f.v = 8;
     struct foo f2;
     f2.v = 8;
-    
+
     struct {
         int f;
     } bar;
     bar.f = 8;
-    
+
     alt_blarg b;
     b.b = 8;
     blarg b2;
     b2.b = 8;
     struct blarg b3;
     b3.b = 8;
-    
+
     //fors s; // fors is a function
     struct fors s;
     s.s = 8;
     fors();
-    
+
     func_or_struct fs;
     fs.s = 8;
-    
+
     // rvalue ctor result
     func_or_struct();
-    
+
     //bort b; // bort is a function
     class bort brt;
     brt.r = 10;
@@ -117,7 +117,7 @@ void libthing()
 {
     cpptestarena::LibThing thing{5};
     thing.printStuff();
-    
+
     Bar b = 10;
     Foo f = b;
     std::cout << f;
@@ -138,13 +138,13 @@ void ownership()
     own_rvalue(std::move(me));
     own_sp(std::make_unique<FooBar>(you));
     own_rvalue({7});
-    
+
     foo a = {};
     foo d{};
     foo c = {10};
 }
 
-        
+
 // Virtual method dispatch
 
 struct ClassParent {
@@ -170,22 +170,22 @@ struct ctor_test {
     int a;
     int b;
     float c;
-    
+
     ctor_test(int a, int b, float c) : a{a}, b{b}, c{c}
     {
         std::cout << "ctor called " << a << std::endl;
     }
-    
+
     ctor_test(const ctor_test& that) : a{that.a}, b{that.b}, c{that.c}
     {
         std::cout << "cctor called " << a << std::endl;
     }
-    
+
     ctor_test(ctor_test&& that) : a{that.a}, b{that.b}, c{that.c}
     {
         std::cout << "mctor called " << a << std::endl;
     }
-    
+
     ~ctor_test()
     {
         std::cout << "dtor called " << a << std::endl;
@@ -227,10 +227,10 @@ template<auto fn, typename Func = decltype(fn)>
 struct better_static_func {
     using func_type = Func;
     constexpr static func_type func = fn;
-    
+
     static_assert(std::is_function_v<std::remove_pointer_t<func_type>>,
                   "template parameter fn must be a function or pointer to function");
-    
+
     constexpr operator func_type() const noexcept { return func; }
 };
 
@@ -243,7 +243,7 @@ template<auto fn, typename Func>
 struct better_static_func<fn, Func, std::enable_if_t<std::is_function_v<std::remove_pointer_t<Func>>>> {
     using func_type = Func;
     constexpr static func_type func = fn;
-    
+
     constexpr operator func_type() const noexcept { return func; }
 };
 */
@@ -267,25 +267,25 @@ void static_func_wrapping()
     // interferes with implicit conversion to function pointer
     np();
     np()();
-    
+
     auto opf = op.value;
     auto npf = np.value;
     opf(12);
     npf();
-    
+
     better_static_func<one_param> bop;
     better_static_func<no_param> bnp;
     bop(20);
     bnp();
-    
+
     auto bopf = bop.func;
     auto bnpf = bnp.func;
     bopf(22);
     bnpf();
-    
+
     better_static_func<&one_param> bopp;
     bopp(30);
-    
+
     // fails static assert
     //better_static_func<5> badFunc;
 }
@@ -318,18 +318,18 @@ int main(int argc, const char* argv[])
 {
     // insert code here...
     std::cout << "Hello, World!\n";
-    
+
     int v{};
     std::cout << "v is " << v << std::endl;
     foo f;
     std::cout << "f is " << f.v << std::endl;
     bar b{2};
     std::cout << "b is " << b.v << std::endl;
-    
+
     constexpr static int num = 10;
     static_assert(0x2 == 2, "foobar");
     //static_assert(0x2 == 0x20, "barfoo");
-    
+
     structDeclarations();
     libthing();
     inheritance();
@@ -337,6 +337,6 @@ int main(int argc, const char* argv[])
     ctors();
     ownership();
     static_func_wrapping();
-    
+
     return 0;
 }
