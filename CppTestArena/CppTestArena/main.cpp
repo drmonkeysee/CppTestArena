@@ -301,6 +301,18 @@ void with_type(int i)
     std::cout << "Bodyless called" << i << std::endl;
 }
 
+class TypeMembers {
+public:
+    using pub = int;
+private:
+    using priv = char;
+};
+
+void type_members()
+{
+    TypeMembers::pub i = 10;
+    //TypeMembers::priv c = 'a'; // type aliases adhere to access rules
+}
 
 int main(int argc, const char* argv[])
 {
