@@ -123,8 +123,27 @@ void libthing()
     std::cout << f;
 }
 
+int myval()
+{
+    return 10;
+}
+
+int& myref()
+{
+    static int myint = 20;
+    return myint;
+}
+
+int* mypoint()
+{
+    static int myint = 30;
+    return &myint;
+}
+
 
 // Ownership and initialization testing
+
+int myarray[] = {1, 2, 3, 4, 5};
 
 void ownership()
 {
