@@ -140,10 +140,9 @@ int* mypoint()
     return &myint;
 }
 
+int myarray[] = {1, 2, 3, 4, 5};
 
 // Ownership and initialization testing
-
-int myarray[] = {1, 2, 3, 4, 5};
 
 void ownership()
 {
@@ -333,10 +332,27 @@ void type_members()
     //TypeMembers::priv c = 'a'; // type aliases adhere to access rules
 }
 
+struct ValueTest {
+        ValueTest(int a, int b) : one{a}, two{b} { std::cout << "Ctor called\n"; }
+        ValueTest(ValueTest&& v) : one{v.one}, two{v.two} { std::cout << "Move ctor called\n"; }
+        ValueTest(const ValueTest& v) : one{v.one}, two{v.two} { std::cout << "Copy ctor called\n"; }
+    int one, two;
+};
+
+void accept_value(ValueTest v)
+{
+    std::cout << "value called: " << v.one << " " << v.two << std::endl;
+}
+
 int main(int argc, const char* argv[])
 {
     // insert code here...
     std::cout << "Hello, World!\n";
+
+    accept_value(ValueTest{1, 2});
+    accept_value({3, 4});
+    ValueTest vt{5, 7};
+    accept_value(vt);
 
     int v{};
     std::cout << "v is " << v << std::endl;
