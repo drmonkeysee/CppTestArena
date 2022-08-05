@@ -9,18 +9,19 @@
 #ifndef CppTestArenaLib_LibThing_hpp
 #define CppTestArenaLib_LibThing_hpp
 
-namespace cpptestarena {
-    class LibThing {
-    public:
-        explicit LibThing(int value)
-        :v{value}
-        {}
+namespace cpptestarena
+{
 
-        void printStuff() const;
+class LibThing {
+public:
+    explicit LibThing(int value) :v{value} {}
 
-    private:
-        int v;
-    };
+    void printStuff() const;
+
+private:
+    int v;
+};
+
 }
 
 #endif
